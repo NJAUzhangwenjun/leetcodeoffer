@@ -1,0 +1,128 @@
+<template name="/aa" value="/**&#10; * @Description: $start$&#10; * @Param:$params$&#10; * @return: $returns$&#10; * @Date: $date$-$time$&#10; */ " description="方法注释" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="start" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="params" expression="methodParameters()" defaultValue="" alwaysStopAt="true" />
+  <variable name="returns" expression="methodReturnType()" defaultValue="" alwaysStopAt="true" />
+  <variable name="date" expression="date()" defaultValue="" alwaysStopAt="true" />
+  <variable name="time" expression="time()" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="asList" value="List&lt;$E$&gt; list = new ArrayList&lt;$E$&gt;(Arrays.asList($arr$));" description="将数组转为List" toReformat="false" toShortenFQNames="true">
+  <variable name="E" expression="typeOfVariable(VAR)" defaultValue="" alwaysStopAt="true" />
+  <variable name="arr" expression="typeOfVariable(VAR)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="jdk1.8" value="&lt;!-- jdk配置 --&gt;&#10;&lt;plugin&gt;&#10;  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;&#10;  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;&#10;  &lt;configuration&gt;&#10;    &lt;source&gt;1.8&lt;/source&gt;&#10;    &lt;target&gt;1.8&lt;/target&gt;&#10;    &lt;encoding&gt;UTF-8&lt;/encoding&gt;&#10;  &lt;/configuration&gt;&#10;&lt;/plugin&gt;" description="jdk1.8配置" toReformat="false" toShortenFQNames="true">
+  <context>
+    <option name="XML" value="true" />
+  </context>
+</template>
+<template name="Jsp" value="&lt;!--Jsp Start--&gt;&#10;&#10;&lt;!-- Servlet API --&gt;&#10;&lt;!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api --&gt;&#10;&lt;dependency&gt;&#10;    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;&#10;    &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;&#10;    &lt;version&gt;3.1.0&lt;/version&gt;&#10;    &lt;scope&gt;provided&lt;/scope&gt;&#10;&lt;/dependency&gt;&#10;&#10;&lt;!-- Jstl for jsp page --&gt;&#10;&lt;!-- http://mvnrepository.com/artifact/javax.servlet/jstl --&gt;&#10;&lt;dependency&gt;&#10;    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;&#10;    &lt;artifactId&gt;jstl&lt;/artifactId&gt;&#10;    &lt;version&gt;1.2&lt;/version&gt;&#10;&lt;/dependency&gt;&#10;&#10;&lt;!-- JSP API --&gt;&#10;&lt;!-- http://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api --&gt;&#10;&lt;dependency&gt;&#10;    &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;&#10;    &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;&#10;    &lt;version&gt;2.2&lt;/version&gt;&#10;    &lt;scope&gt;provided&lt;/scope&gt;&#10;&lt;/dependency&gt;&#10;&#10;&lt;!--Jsp End--&gt;" description="添加jsp依赖" toReformat="false" toShortenFQNames="true">
+  <context>
+    <option name="XML_TEXT" value="true" />
+  </context>
+</template>
+<template name="list2Arr" value="List&lt;$String$&gt; list = Arrays.asList($arr$);&#10;//list借助工具类操，作如：Collections.reverse(list);&#10;$todo$&#10;//还原数组：new String[0]起指定类型作用；没有指定类型的话会报错&#10;$arr$=list.toArray(new $String$[0]);" toReformat="false" toShortenFQNames="true">
+  <variable name="String" expression="typeOfVariable(VAR)" defaultValue="String" alwaysStopAt="true" />
+  <variable name="arr" expression="arrayVariable()" defaultValue="s" alwaysStopAt="true" />
+  <variable name="todo" expression="fileName()" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="logger" value="Logger logger = LoggerFactory.getLogger(this.getClass());" description="日志输出" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="ml" value="Lock $l$ = new ReentrantLock();&#10;$l$.lock();&#10;try {&#10;    // access the resource protected by this lock&#10;    $end$&#10;} finally {&#10;    $l$.unlock();&#10;}" description="新建lock添加同步代码块" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="l" expression="firstWord(String)" defaultValue="l" alwaysStopAt="true" />
+  <variable name="end" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="mlt" value="$end$.lock();&#10;try {&#10;    // access the resource protected by this lock&#10;    $start$&#10;} finally {&#10;    $end$.unlock();&#10;}" description="用已有lock添加同步代码块" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="end" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="start" expression="firstWord(String)" defaultValue="l" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="mt" value="new Thread(new Runnable() {&#10;    @Override&#10;    public void run() {&#10;        // TODO: &#10;        $end$&#10;    }&#10;}, &quot;$astart$&quot;).start();&#10;" description="开启一个Runnable接口线程" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="end" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="astart" expression="expressionType(Expression)" defaultValue="t1" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="mtl" value="new Thread(() -&gt; {&#10;    // TODO:&#10;    $start$&#10;}, &quot;$end$&quot;).start();" description="开启一个lambda实现的线程" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="start" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="end" expression="fileNameWithoutExtension()" defaultValue="t1" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="prm" value="public $className$ $methodName$() {&#10;    $todo$&#10;    return $ret$;&#10;}" description="有返回值的方法" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+  <variable name="className" expression="className()" defaultValue="" alwaysStopAt="true" />
+  <variable name="methodName" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+  <variable name="todo" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="ret" expression="methodReturnType()" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="psm" value="public String $methodName$() {&#10;    $todo$&#10;    return &quot;$ret$&quot;;&#10;}" description="返回String类型的方法" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="methodName" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+  <variable name="todo" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="ret" expression="methodReturnType()" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="psv" value="public synchronized void $methodName$() {&#10;    $to$&#10;}" description="创建synchronized的方法" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+  <variable name="methodName" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="to" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="pvm" value="public void $methodName$() {&#10;    $todo$  &#10;}" description="无返回值的方法" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+  <variable name="methodName" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <variable name="todo" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="sleep" value="try { TimeUnit.SECONDS.sleep($time$); } catch (InterruptedException e) { e.printStackTrace(); }" description="等待一段时间" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+  <variable name="time" expression="firstWord(String)" defaultValue="3" alwaysStopAt="false" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="syso" value="System.out.println();" description="输出语句" toReformat="false" toShortenFQNames="true">
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="tc" value="Thread.currentThread()$start$" description="获取当前线程" toReformat="true" toShortenFQNames="true">
+  <variable name="start" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="test1" value="@Test&#10;public void $methodName$(){&#10;    $to$&#10;}" description="测试类" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+  <variable name="methodName" expression="methodName()" defaultValue="testMethod" alwaysStopAt="true" />
+  <variable name="to" expression="firstWord(String)" defaultValue="" alwaysStopAt="true" />
+  <context>
+    <option name="JAVA_CODE" value="true" />
+  </context>
+</template>
+<template name="tomcat7" value="&lt;!-- java编译插件 --&gt;&#10;&lt;plugin&gt;&#10;  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;&#10;  &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;&#10;  &lt;version&gt;3.2&lt;/version&gt;&#10;  &lt;configuration&gt;&#10;    &lt;source&gt;1.8&lt;/source&gt;&#10;    &lt;target&gt;1.8&lt;/target&gt;&#10;    &lt;encoding&gt;UTF-8&lt;/encoding&gt;&#10;  &lt;/configuration&gt;&#10;&lt;/plugin&gt;&#10;&lt;plugin&gt;&#10;  &lt;groupId&gt;org.apache.tomcat.maven&lt;/groupId&gt;&#10;  &lt;artifactId&gt;tomcat7-maven-plugin&lt;/artifactId&gt;&#10;  &lt;configuration&gt;&#10;    &lt;!-- 指定端口 --&gt;&#10;    &lt;port&gt;8080&lt;/port&gt;&#10;    &lt;!-- 请求路径 --&gt;&#10;    &lt;path&gt;/&lt;/path&gt;&#10;  &lt;/configuration&gt;&#10;&lt;/plugin&gt;" description="tomcat的模板" toReformat="false" toShortenFQNames="true">
+  <context>
+    <option name="XML" value="true" />
+  </context>
+</template>
