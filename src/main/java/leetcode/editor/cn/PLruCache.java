@@ -60,85 +60,83 @@
 package leetcode.editor.cn;
 
 import java.util.HashMap;
-import java.util.Stack;
+import java.util.Map;
 
 // Java：LRU 缓存机制 : 146
 public class PLruCache {
   public static void main(String[] args) {
-    LRUCache solution = new PLruCache().new LRUCache(2);
-    solution.put(1, 1);
-    solution.put(2, 2);
-    solution.get(1);
-    solution.put(3,3);
-    //    solution.put(1,2);
-    System.out.println("solution = " + solution);
-
-    //    LRUCache cache = new LRUCache(3);
-
+    //        Solution solution = new PLruCache().new Solution();
     // TO TEST
   }
   // leetcode submit region begin(Prohibit modification and deletion)
   class LRUCache {
-
-    @Override
-    public String toString() {
-      System.out.println("stack = " + stack.toString());
-      final StringBuilder stringBuilder = new StringBuilder();
-      while (stack.size()>0) {
-       stringBuilder.append(""+map.get(stack.pop()));
-      }
-      return stringBuilder.toString();
-    }
-
-    private HashMap<Integer, Integer> map;
-    private Stack<Integer> stack;
-    private Integer size;
-
+    private Map<Integer, DoubleNode> map;
+    private Integer capacity;
     public LRUCache(int capacity) {
-      map = new HashMap<>(capacity);
-      size = capacity;
-      stack = new Stack<>();
+      this.capacity = capacity;
+      this.map = new HashMap<>(capacity);
+      this.head = new DoubleNode(-1, -1);
+      this.tail = new DoubleNode(-1, -1);
+      head.next = tail;
+      tail.pre = head;
     }
 
     public int get(int key) {
-      if (map.containsValue(key)) {
-        stack.remove((Integer) key);
-        stack.push(key);
+      if (!map.containsKey(key)) {
+        return -1;
       }
-      return map.getOrDefault(key, -1);
+      DoubleNode doubleNode = map.get(key);
+      updateNode(doubleNode);
+      return doubleNode.val;
     }
 
     public void put(int key, int value) {
-      if (--size < 0) {
-        map.remove(stack.pop());
-        ++size;
+      if (map.containsKey(key)) {
+        DoubleNode doubleNode = map.remove(key);
+        doubleNode.val = value;
+        updateNode(doubleNode);
+        map.put(key, doubleNode);
+        return;
       }
-      if (map.containsKey(key))stack.remove((Integer) key);
-      stack.push(key);
-      map.put(key, value);
+      DoubleNode node = new DoubleNode(key, value);
+      if (capacity <= map.size()) {
+        map.remove(tail.pre.key);
+        removeNode(tail.pre);
+      }
+      map.put(key, node);
+      addNode(node);
+    }
+
+    private class DoubleNode {
+      private DoubleNode pre, next;
+      private Integer key;
+      private Integer val;
+
+      public DoubleNode(Integer key, Integer val) {
+        this.key = key;
+        this.val = val;
+      }
+    }
+
+    private DoubleNode head, tail;
+
+    private void addNode(DoubleNode node) {
+      node.next = head.next;
+      head.next.pre = node;
+      node.pre = head;
+      head.next = node;
+    }
+
+    private void removeNode(DoubleNode node) {
+      node.pre.next = node.next;
+      node.next.pre = node.pre;
+    }
+
+    private void updateNode(DoubleNode node) {
+      removeNode(node);
+      addNode(node);
     }
   }
-  /*class LRUCache extends LinkedHashMap<Integer, Integer> {
-    private int capacity;
-
-    public LRUCache(int capacity) {
-      super(capacity, 0.75F, true);
-      this.capacity = capacity;
-    }
-
-    public int get(int key) {
-      return super.getOrDefault(key, -1);
-    }
-
-    public void put(int key, int value) {
-      super.put(key, value);
-    }
-
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
-      return size() > capacity;
-    }
-  }*/
 
   /**
    * Your LRUCache object will be instantiated and called as such: LRUCache obj = new
