@@ -66,10 +66,13 @@ public class PCoinChange {
   }
   // leetcode submit region begin(Prohibit modification and deletion)
   class Solution {
+    // Java：零钱兑换 : 322
     public int coinChange(int[] coins, int amount) {
       if (amount == 0) return 0;
-      //      f(n): 数量；n:金额
-      // f(n) = [f(n-X0),...,f(n-Xn)]min
+      /**
+       * f(n): 数量；n:金额 ；
+       * f(n) = [f(n-X0),...,f(n-Xn)]min
+       * */
       final int[] f = new int[amount + 1];
       f[0] = 0;
       for (int i = 1; i < f.length; i++) {
