@@ -13,4 +13,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = {"fuxi.spring.main.config"})
 public class Config {
+
 }

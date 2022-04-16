@@ -27,6 +27,5 @@ public class App {
 		System.out.println("user = " + user2);
 		Object user3 = context.getBean("user");
 		System.out.println("user = " + user3);
-
 	}
 }

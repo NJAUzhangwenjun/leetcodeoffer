@@ -5,6 +5,14 @@
 package leetcode.editor.cn;
 
 // Java：二叉树中的最大路径和 : 124
+// 难度：中等
+// 题意：给定一个二叉树，找出其最大路径和。
+// 路径：指从树中任意节点出发，路径上所有节点的值之和，可以看做是整棵树的值。
+// 示例：
+// 输入：
+// -10
+// 9
+
 
 // 路径 被定义为一条从树中任意节点出发，沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中 至多出现一次 。该路径 至少包含一个 节点，且不
 // 一定经过根节点。
@@ -40,8 +48,6 @@ package leetcode.editor.cn;
 //
 // Related Topics 树 深度优先搜索 递归
 
-import leetcode.editor.utils.TreeNode;
-
 public class PBinaryTreeMaximumPathSum {
 
   public static void main(String[] args) {
@@ -57,24 +63,12 @@ public class PBinaryTreeMaximumPathSum {
    * TreeNode right) { this.val = val; this.left = left; this.right = right; } }
    */
   class Solution {
-    private int maxValue = Integer.MIN_VALUE;
+// 二叉树中的最大路径和 : 124
+// 二叉树中的最大路径和 : 124
 
-    public int maxPathSum(TreeNode root) {
-      if (root == null) return 0;
-      dfs(root);
-      return maxValue;
-    }
 
-    private int dfs(TreeNode root) {
-      if (root == null) return 0;
-      int l = Math.max(0, dfs(root.left));
-      int r = Math.max(0, dfs(root.right));
-      int lmr = l + r + root.val;
-      int lr = root.val + Math.max(l, r);
-      maxValue = Math.max(maxValue, Math.max(lmr, lr));
-      return lr;
-    }
+
   }
   // leetcode submit region end(Prohibit modification and deletion)
-
+//  二叉树中的最大路径和
 }

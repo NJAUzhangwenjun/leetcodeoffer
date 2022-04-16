@@ -29,9 +29,9 @@ public class JUCTest {
 
 	}
 
-	@Test
+//	@Test
 	public void s() {
-		
+
 		for (int i = 0; i < 5; i++) {
 			new Thread(() -> {
 				synchronized (this.getClass()) {
@@ -44,6 +44,25 @@ public class JUCTest {
 
 	}
 
+	//create thread pool
+	@Test
+	public void c1() throws InterruptedException, BrokenBarrierException {
+		for (int i = 0; i < 5; i++) {
+			new Thread(() -> {
+				try { SECONDS.sleep(2); } catch (InterruptedException e) { e.printStackTrace(); }
+				System.out.println(Thread.currentThread().getName());
+				try {
+					cyclicBarrier.await();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}, "JUCTest"+i).start();
+		}
+		SECONDS.sleep(5);
+		System.out.println("JUCTest.main CarryOut！");
+	}
+
+	@Test
 	public void c() {
 		for (int i = 0; i < 5; i++) {
 			synchronized (this.getClass()) {
